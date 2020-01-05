@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Response{
+public class FilmObject {
 
 	@SerializedName("metadata")
 	private Metadata metadata;
@@ -31,7 +31,7 @@ public class Response{
 	@Override
  	public String toString(){
 		return 
-			"Response{" + 
+			"FilmObject{" +
 			"metadata = '" + metadata + '\'' + 
 			",data = '" + data + '\'' + 
 			"}";
