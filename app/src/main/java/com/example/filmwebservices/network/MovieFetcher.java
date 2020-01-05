@@ -52,6 +52,7 @@ public class MovieFetcher {
             @Override
             public void onResponse(Call<FilmObject> call, Response<FilmObject> response) {
                 if (response.isSuccessful()){
+                    Log.e(TAG, "onResponse: WHERE IS THIS :| " );
                     FilmObject filmObject = response.body();
                     List<DataItem> dataItemList = filmObject.getData();
 
@@ -65,10 +66,6 @@ public class MovieFetcher {
             }
         });
 
-        return mDataMutableLiveData;
-    }
-
-    public MutableLiveData<List<DataItem>> getResponseMutableLiveData() {
         return mDataMutableLiveData;
     }
 }

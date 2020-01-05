@@ -24,6 +24,10 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmsViewHol
         mContext = context;
     }
 
+    public void setItemList(List<DataItem> itemList) {
+        mItemList = itemList;
+    }
+
     @NonNull
     @Override
     public FilmsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

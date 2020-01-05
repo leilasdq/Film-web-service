@@ -21,7 +21,7 @@ public class FilmsViewModel extends AndroidViewModel {
 
     public LiveData<List<DataItem>> getItemsLiveData() {
         mFetcher = MovieFetcher.getInstance();
-        mItemsLiveData = mFetcher.getResponseMutableLiveData();
+        mItemsLiveData = mFetcher.getMovies(1);
         return mItemsLiveData;
     }
 }
