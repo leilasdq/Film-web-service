@@ -2,16 +2,13 @@ package com.example.filmwebservices.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.filmwebservices.R;
+import com.example.filmwebservices.databinding.FilmsListItemsBinding;
 import com.example.filmwebservices.model.DataItem;
 
 import java.util.ArrayList;
@@ -30,8 +27,9 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmsViewHol
     @NonNull
     @Override
     public FilmsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.films_list_items, parent, false);
-        return new FilmsViewHolder(view);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        FilmsListItemsBinding filmsListItemsBinding = FilmsListItemsBinding.inflate(inflater, parent, false);
+        return new FilmsViewHolder(filmsListItemsBinding);
     }
 
     @Override
@@ -46,30 +44,22 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.FilmsViewHol
 
     class FilmsViewHolder extends RecyclerView.ViewHolder{
         DataItem mDataItem;
-        ImageView mPoster;
-        TextView mName;
-        TextView mGener;
-        TextView mYear;
-        TextView mImdb;
+        FilmsListItemsBinding mBinding;
 
-        public FilmsViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public FilmsViewHolder(FilmsListItemsBinding binding) {
+            super(binding.getRoot());
 
-            mPoster = itemView.findViewById(R.id.film_image);
-            mName = itemView.findViewById(R.id.name);
-            mGener = itemView.findViewById(R.id.gener);
-            mYear = itemView.findViewById(R.id.year);
-            mImdb = itemView.findViewById(R.id.imdb_name);
+            mBinding = binding;
         }
 
         public void bind(DataItem dataItem){
             mDataItem = dataItem;
 
-            mName.setText(mDataItem.getTitle());
-            mGener.setText(mDataItem.getGenres().get(0));
-            mYear.setText(mDataItem.getYear());
-            mImdb.setText(mDataItem.getImdbRating());
-            Glide.with(mContext).load(mDataItem.getPoster()).centerCrop().into(mPoster);
+            mBinding.name.setText(mDataItem.getTitle());
+            mBinding.gener.setText(mDataItem.getGenres().get(0));
+            mBinding.year.setText(mDataItem.getYear());
+            mBinding.imdbName.setText(mDataItem.getImdbRating());
+            Glide.with(mContext).load(mDataItem.getPoster()).centerCrop().into(mBinding.filmImage);
         }
     }
 }
