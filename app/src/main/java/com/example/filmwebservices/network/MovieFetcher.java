@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.filmwebservices.model.DataItem;
 import com.example.filmwebservices.model.FilmObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ public class MovieFetcher {
     private Retrofit mRetrofit;
     private static MovieFetcher sInstance;
     private Map<String, String> mQueries = new HashMap<>();
+    private List<DataItem> mOriginalList = new ArrayList<>();
 
     private MutableLiveData<List<DataItem>> mDataMutableLiveData = new MutableLiveData<>();
 
@@ -55,8 +57,9 @@ public class MovieFetcher {
                     Log.e(TAG, "onResponse: WHERE IS THIS :| " );
                     FilmObject filmObject = response.body();
                     List<DataItem> dataItemList = filmObject.getData();
+                    mOriginalList.addAll(dataItemList);
 
-                    mDataMutableLiveData.setValue(dataItemList);
+                    mDataMutableLiveData.setValue(mOriginalList);
                 }
             }
 
@@ -69,3 +72,4 @@ public class MovieFetcher {
         return mDataMutableLiveData;
     }
 }
+

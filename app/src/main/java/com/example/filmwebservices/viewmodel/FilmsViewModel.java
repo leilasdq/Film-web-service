@@ -12,7 +12,7 @@ import com.example.filmwebservices.network.MovieFetcher;
 import java.util.List;
 
 public class FilmsViewModel extends AndroidViewModel {
-    private MovieFetcher mFetcher;
+    private MovieFetcher mFetcher = MovieFetcher.getInstance();
     private LiveData<List<DataItem>> mItemsLiveData;
 
     public FilmsViewModel(@NonNull Application application) {
@@ -20,8 +20,10 @@ public class FilmsViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<DataItem>> getItemsLiveData() {
-        mFetcher = MovieFetcher.getInstance();
-        mItemsLiveData = mFetcher.getMovies(1);
         return mItemsLiveData;
+    }
+
+    public void sendRequest(int pageNumber){
+        mItemsLiveData = mFetcher.getMovies(pageNumber);
     }
 }
